@@ -61,15 +61,19 @@ namespace InteractiveFiction
 
                 else if (OnTitleScreen == false)
                 {
-                    if (readKeyInput.Key == ConsoleKey.A)
+                    if (readKeyInput.Key == ConsoleKey.A)             // chooses option a
                     {
                         currentPage = Int32.Parse(pageA);
                         PageChange();
                     }
-                    else if (readKeyInput.Key == ConsoleKey.B)
+                    else if (readKeyInput.Key == ConsoleKey.B)        // chooses option b
                     {
                         currentPage = Int32.Parse(pageB);
                         PageChange();
+                    }
+                    else if (readKeyInput.Key == ConsoleKey.Escape)        // chooses option b
+                    {
+                        gameOver = true;
                     }
                 }
             }
@@ -84,10 +88,11 @@ namespace InteractiveFiction
         
         static void StoryInitialization() // where the story is saved
         {
-            story[0] = "title_Start_Quit_1_ ";
+            story[0] = "Morning in the Mysterious Mansion_Start_Quit_1_ ";
+
             story[1] = "You wake up in a dark room, groggy and confused. The first thing you notice is the dust of the bed which you're resting on, along with the scent of mildew lingering in the air. Your confusion morphs into fear, you realise you don't remember where you are, nor how you got here. Squinting around the room, you can faintly see the outline of a dresser, along with a faint glow under the crack of what you assume is the door._Explore the room_Open the door_2_3"; // the title page  
             
-            story[2] = "Thinking it probably isn't the best idea to boldly jump out into the unknown, you instead look around the room. To your left is that door, with the dresser directly across from you. To your right there appears to be some sort of cabinet, and upon closer inspection, a window covered by a long, simple curtain._Look out the window _Open the door _4_3";  
+            story[2] = "Thinking it probably isn't the best idea to boldly jump out into the unknown, you instead look around the room. To your left is that door, with the dresser directly across from you. To your right there appears to be some sort of cabinet, and upon closer inspection, a window covered by a long, simple curtain._Look out the window _Open the door_4_3";  
 
             story[3] = "Opening the door, you're greeted by a startling sight. An ornately decorated hall greets you on the other side, wall mounted candles illuminating the carpet with its swirling patterns. To your right, a large, wooden door blocks your path, to your left, a seemingly unending hall._Go right_Go left_5_6"; 
 
@@ -95,14 +100,10 @@ namespace InteractiveFiction
 
             story[5] = "Walking up to the large doors, you push forward; slowly moving the heavy wood aside, you find yourself in a magnificent library. Everywhere you look, books line the walls, except for the large fareplace directly across from you. A large portrait looms overhead, and a worn chair sits by a small table by the fireplace._Investigate the painting_Look at the books_9_11"; // see story 12
          
-            story[6] = "With one last glance, you decide to sneak down the hall towards the unkown. With each step the heavy beating of your heart is all you hear. Slowly passing closed doors, you come to a grand foyer. Two grand staircases line the walls; the main focus point, a sparkling chandalier, hangs comfortably in the center of the room, right a bove a shining grand piano. Further down the hall, the sound of a door closing, along with the accompaning clicks of footsteps, gets your attention._Go downstairs_Run back to your room!_ _10"; // see story 15
-            //story[16] = "Go downstairs"; // see story 30
-            //story[17] = "Run back to your room"; // see story 33
-
-            story[7] = "Climbing into the cabinet as quick as you can, you hold your breath as the door to your room creaks open. You hear a faint gasp as a glass breaks. 'Lady Camilla? Lady Camilla I must ask you to come this instant!' An older voice cries out, as they run down the hall._Continue hiding_Leave the cabinet_ _ "; // see story 9
-            //story[19] = "Continue Hiding"; // see story 36
-            //story[20] = "Leave the cabinet"; // see story 39
-
+            story[6] = "With one last glance, you decide to sneak down the hall towards the unkown. With each step the heavy beating of your heart is all you hear. Slowly passing closed doors, you come to a grand foyer. Two grand staircases line the walls; the main focus point, a sparkling chandalier, hangs comfortably in the center of the room, right a bove a shining grand piano. Further down the hall, the sound of a door closing, along with the accompaning clicks of footsteps, gets your attention._Go downstairs_Run back to your room!_12_10"; // see story 15
+            
+            story[7] = "Climbing into the cabinet as quick as you can, you hold your breath as the door to your room creaks open. You hear a faint gasp as a glass breaks. 'Lady Camilla? Lady Camilla I must ask you to come this instant!' An older voice cries out, as they run down the hall._Continue hiding_Leave the cabinet_13_ "; // see story 9
+            
             story[8] = "Quickly opening the latch and swinging the window open, you clamber out onto the roof. It's colder than you expected, crossing your arms as you shiver under the moonlight. Getting a better look now, you can see a decorated fountain in the middle of the courtyard, surrounded by a garden of roses. further past that, a hedge maze with some large, white, object in the middle of it. Now that you think of it, how are you going to get down from here?_The tree by the corner of the courtyard_Find an unlocked window_ _ "; // see story 9
            
             story[9] = "The painting seems very old, it consists of a woman and man, along with three children. One girl sticks out to you though, her long brown hair, and her ear to ear grin, complimented by her joyful blue eyes. Seeing her so happy... it fills you with sadness._ _ _ _ ";
@@ -111,7 +112,12 @@ namespace InteractiveFiction
 
             story[11] = "Looking around the countless bookshelves, you run your hand along them as you walk by. You can tell its a well kept room, almost jealous that the books were kept better than you. Now in the back corner of the room you stop. A large book titled 'The History of the von Trapps' catches you eyes. You don't know why, but you instinctively reach out and grab it. But in doing so, the entire bookshelf begins to shake violently, soon slowly swinging open to reveal a sectret staircase._Enter the staircase_Make a torch first_ _ ";
 
-            story[12] = "Quickly running down the stairs you slide under the piano, as you listen to the mysterious steps pass by. Slowly crawling out from your hiding place, you begin to get a better look. A large mirror is centered on the wall below the rails of the upper landing.";
+            story[12] = "Quickly running down the stairs you slide under the piano, as you listen to the mysterious steps pass by. Slowly crawling out from your hiding place, you begin to get a better look. A large mirror is centered on the wall below the rails of the upper landing. Across from that, a grandiose entrance fitted out with elegant wooden doors, a marble platform leading down to the main floor with a step. To the left and right are to large wooden arches. Walking up to the door, you find it locked._Go left_Go right_ _ ";
+
+            story[13] = "You figure it'd be safest to stay where you're probably safe. You soon hear two sets of footsteps come rushing this way; holding your breath, you stay as silent as possible. 'Im talling you Lady Camilla, when I opened the door to check on her, she was just gone!' You hear that same voice from before, along with one unkown, but familiar. 'WHAT? How could you lose her? She hasn't so much as sturred for years! It's not like she just got up and walked away!' You hear loud steps pacing around. 'She can't have gone far!I want you to search EVERYWHERE!' Your heart sinks, as you realise only one pair of steps left the room; you sit in silence as you wait for the inevitable, yet instead you hear faint sound of crying. 'After all these years I've spent searching, researching for a cure, just to have you disappear now. Where have you gone my dear Mary? Why must you disappear after all i've done to save you? Please come home.' After much hesitation, you slowly open the cuboard door._Ending Achieved: Mother?_Press escape to quit_ _ ";
+
+
+
 
 
         }
