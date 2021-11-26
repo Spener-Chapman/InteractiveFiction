@@ -142,7 +142,9 @@ namespace InteractiveFiction
             Console.WriteLine("");
             Console.WriteLine(storyWritten);
             Console.WriteLine();
+            Console.ForegroundColor = ConsoleColor.Red;
             Console.WriteLine("What will you do?");
+            Console.ResetColor();
             Console.WriteLine("A " + optionA + " " + pageA);
             Console.WriteLine("B " + optionB + " " + pageB);
 
