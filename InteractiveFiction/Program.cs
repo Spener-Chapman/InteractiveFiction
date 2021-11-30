@@ -38,7 +38,8 @@ namespace InteractiveFiction
         static void Main(string[] args)
         {
             story = System.IO.File.ReadAllLines(@"story.txt");
-            TitlePage(); // since it's initialized to be the title page, this will always play the title page here
+            savePage = System.IO.File.ReadAllLines(@"savefile.txt");
+            WriteTitlePage(); // since it's initialized to be the title page, this will always play the title page here
             
 
             while (gameOver == false)
@@ -54,12 +55,19 @@ namespace InteractiveFiction
                         OnTitleScreen = false;                      
                         PageChange();
                     }
-                    else if (readKeyInput.Key == ConsoleKey.B)
+                    else if (readKeyInput.Key == ConsoleKey.B)  // finds the save file, and writes what page was saved on it
                     {
-                        savePage = System.IO.File.ReadAllLines(@"savefile.txt");
-                        page = savePage;
-                        WritePage();
-                        OnTitleScreen = false;
+                        if (string.IsNullOrWhiteSpace(savePage[0]))
+                        {
+                            Console.WriteLine("There is no save found");
+                        }
+                        else
+                        {
+                            
+                            page = savePage;
+                            WritePage();
+                            OnTitleScreen = false;
+                        }
                     }
                     else if (readKeyInput.Key == ConsoleKey.C)        // quits the game
                     {
@@ -71,15 +79,29 @@ namespace InteractiveFiction
                 {
                     if (readKeyInput.Key == ConsoleKey.A)             // chooses option a
                     {
-                        currentPage = Int32.Parse(pageA);
-                        PageChange();
+                        if (string.IsNullOrWhiteSpace(page[3]))
+                        {
+                            ReturnToTitle();
+                        }
+                        else
+                        {
+                            currentPage = Int32.Parse(pageA);
+                            PageChange();
+                        }
                     }
                     else if (readKeyInput.Key == ConsoleKey.B)        // chooses option b
                     {
-                        currentPage = Int32.Parse(pageB);
-                        PageChange();
+                        if (string.IsNullOrWhiteSpace(page[4]))
+                        {
+                            ReturnToTitle();
+                        }
+                        else
+                        {
+                            currentPage = Int32.Parse(pageB);
+                            PageChange();
+                        }
                     }
-                    else if (readKeyInput.Key == ConsoleKey.C)        // chooses option b
+                    else if (readKeyInput.Key == ConsoleKey.C)        // saves what page you're on in a file called savefile.txt
                     {
                         System.IO.File.WriteAllLines(@"savefile.txt", page);
                         savePage = System.IO.File.ReadAllLines(@"savefile.txt");
@@ -90,9 +112,9 @@ namespace InteractiveFiction
 
         }
         
-        static void TitlePage()
+        static void WriteTitlePage()
         {
-            page = story[currentPage].Split('_');
+            page = story[0].Split('_');
             storyWritten = page[0];
             pageA = page[3];
 
@@ -128,12 +150,46 @@ namespace InteractiveFiction
             Console.ForegroundColor = ConsoleColor.Red;
             Console.WriteLine("What will you do?");
             Console.ResetColor();
-            Console.WriteLine("A " + optionA + " " + pageA);
-            Console.WriteLine("B " + optionB + " " + pageB);
-            Console.WriteLine("C Save & Quit");
+            if (string.IsNullOrWhiteSpace(page[3]))
+            {
+                
+            }
+            else
+            {
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.Write("A ");
+                Console.ResetColor();
+                Console.WriteLine(optionA);
+            }
+            if (string.IsNullOrWhiteSpace(page[4]))
+            {
+
+            }
+            else
+            {
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.Write("B ");
+                Console.ResetColor();
+                Console.WriteLine(optionB);
+            }
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.Write("C ");
+            Console.ResetColor();
+            Console.WriteLine("Save & Quit");
         }
-       
-       
+
+        static void ReturnToTitle()
+        {
+            Console.WriteLine();
+            Console.WriteLine();
+            Console.WriteLine();
+            Console.WriteLine();
+            WriteTitlePage();
+            Console.WriteLine();
+            Console.WriteLine();
+            Console.WriteLine();
+            Console.WriteLine();
+        }
         
         
 
